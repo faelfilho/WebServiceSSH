@@ -1,53 +1,75 @@
 <?php
 include 'header.php';
 
-// session_start();
-//   if (!isset($_SESSION['user'])){
-//     header("location:login.php");
-//   }
+session_start();
+  if (!isset($_SESSION['username'])){
+    header("location:login.php");
+  }
 ?>
 
-<div class="jumbotron">
-  <h1>khju</h1>
-</div>
-<div class="container">
-  <?php
-$server['ip'] = "191.96.139.161";
-$server['sshport'] = 22;
-$server['user'] = "root";
-$server['password'] = "nossa123*";
+<div class="nav-side-menu">
+    <div class="brand"><h2 class="titulo"><span class="foco-titulo-web">Web</span>Service <span class="foco-titulo-ssh">SSH</span></h2><br /></div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
-$command = "uname -a";
+        <div class="menu-list">
 
-if($ssh = ssh2_connect($server['ip'], $server['sshport'])) {
+            <ul id="menu-content" class="menu-content collapse out">
+                <li>
+                  <a href="#">
+                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                  </a>
+                </li>
 
-  if($ssh_auth_password($ssh, $server['user'], $server['password'])) {
+                <li  data-toggle="collapse" data-target="#products" class="collapsed active">
+                  <a href="#"><i class="fa fa-gift fa-lg"></i> UI Elements <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="products">
+                    <li class="active"><a href="#">CSS3 Animation</a></li>
+                    <li><a href="#">General</a></li>
+                    <li><a href="#">Buttons</a></li>
+                    <li><a href="#">Tabs & Accordions</a></li>
+                    <li><a href="#">Typography</a></li>
+                    <li><a href="#">FontAwesome</a></li>
+                    <li><a href="#">Slider</a></li>
+                    <li><a href="#">Panels</a></li>
+                    <li><a href="#">Widgets</a></li>
+                    <li><a href="#">Bootstrap Model</a></li>
+                </ul>
 
-$stream = ssh2_exec($ssh, $command);
 
-stream_set_blocking($stream, true);
+                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                  <a href="#"><i class="fa fa-globe fa-lg"></i> Services <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="service">
+                  <li>New Service 1</li>
+                  <li>New Service 2</li>
+                  <li>New Service 3</li>
+                </ul>
 
-$data = '';
 
-while($buffer = fread($stream, 4096))
+                <li data-toggle="collapse" data-target="#new" class="collapsed">
+                  <a href="#"><i class="fa fa-car fa-lg"></i> New <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="new">
+                  <li>New New 1</li>
+                  <li>New New 2</li>
+                  <li>New New 3</li>
+                </ul>
 
-{
- $data .= $buffer;
 
-}
+                 <li>
+                  <a href="#">
+                  <i class="fa fa-user fa-lg"></i> Profile
+                  </a>
+                  </li>
 
-fclose($stream);
-echo $data;
-
-}else {
-  echo "Falhou: usuario ou senha incorretos!";
-}
-
-}else {
-  echo "Falhou: ip ou porta incorretos!";
-}
-
-?>
+                 <li>
+                  <a href="#">
+                  <i class="fa fa-users fa-lg"></i> Users
+                  </a>
+                </li>
+            </ul>
+     </div>
 </div>
 
 <?php include 'footer.php'; ?>
